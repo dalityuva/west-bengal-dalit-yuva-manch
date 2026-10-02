@@ -1437,6 +1437,305 @@ h2 span{
 
 }
 
+
+/* =========================================================
+   JOIN US ON SOCIAL MEDIA
+========================================================= */
+.social-community-section{
+    padding:85px 0;
+    background:linear-gradient(135deg,#fff7ed 0%,#fffaf5 55%,#ffedd5 100%);
+    border-top:1px solid #fed7aa;
+    border-bottom:1px solid #fed7aa;
+}
+.social-community-head{
+    text-align:center;
+    max-width:720px;
+    margin:0 auto 38px;
+}
+.social-community-head p{
+    color:#78716c;
+    margin-top:14px;
+}
+.social-community-grid{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:16px;
+}
+.social-community-card{
+    min-height:190px;
+    padding:26px 22px;
+    border-radius:20px;
+    background:#fff;
+    border:1px solid #eee7df;
+    box-shadow:0 14px 35px rgba(68,64,60,.07);
+    display:flex;
+    flex-direction:column;
+    align-items:flex-start;
+    transition:.28s ease;
+}
+.social-community-card:hover{
+    transform:translateY(-6px);
+    border-color:#fdba74;
+    box-shadow:0 20px 45px rgba(68,64,60,.12);
+}
+.social-community-icon{
+    width:52px;
+    height:52px;
+    border-radius:15px;
+    display:grid;
+    place-items:center;
+    background:#ffedd5;
+    color:#9a3412;
+    font-size:23px;
+    margin-bottom:17px;
+}
+.social-community-card h3{
+    font-family:"Playfair Display",serif;
+    font-size:21px;
+    margin-bottom:5px;
+}
+.social-community-card p{
+    color:#78716c;
+    font-size:12px;
+    margin-bottom:18px;
+}
+.social-community-action{
+    margin-top:auto;
+    color:#9a3412;
+    font-size:12px;
+    font-weight:800;
+    display:flex;
+    align-items:center;
+    gap:7px;
+}
+.social-community-card.whatsapp{
+    background:linear-gradient(145deg,#ffffff,#f0fdf4);
+}
+.social-community-card.whatsapp .social-community-icon{
+    background:#dcfce7;
+    color:#15803d;
+}
+.social-community-card.whatsapp .social-community-action{
+    color:#15803d;
+}
+@media(max-width:950px){
+    .social-community-grid{grid-template-columns:repeat(2,1fr);}
+}
+@media(max-width:650px){
+    .social-community-section{padding:65px 0;}
+    .social-community-grid{grid-template-columns:1fr;}
+    .social-community-card{min-height:155px;}
+}
+
+
+/* =========================================================
+   COMMUNITY VOICE
+========================================================= */
+
+.voice-section{
+    background:linear-gradient(135deg,#fff7ed,#ffffff 55%,#fffbeb);
+    position:relative;
+    overflow:hidden;
+}
+
+.voice-section::before{
+    content:"";
+    position:absolute;
+    width:360px;
+    height:360px;
+    border:1px solid rgba(154,52,18,.08);
+    border-radius:50%;
+    right:-170px;
+    top:40px;
+}
+
+.voice-section::after{
+    content:"";
+    position:absolute;
+    width:180px;
+    height:180px;
+    border-radius:50%;
+    background:rgba(251,191,36,.10);
+    left:-70px;
+    bottom:-70px;
+}
+
+.voice-wrap{
+    position:relative;
+    z-index:1;
+}
+
+.voice-grid{
+    display:grid;
+    grid-template-columns:.82fr 1.18fr;
+    gap:55px;
+    align-items:start;
+}
+
+.voice-intro{
+    padding-top:10px;
+}
+
+.voice-intro h2{
+    margin-bottom:18px;
+}
+
+.voice-intro > p{
+    color:#78716c;
+    max-width:500px;
+    font-size:15px;
+}
+
+.voice-points{
+    display:grid;
+    gap:12px;
+    margin-top:28px;
+}
+
+.voice-point{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    color:#57534e;
+    font-size:13px;
+}
+
+.voice-point i{
+    width:38px;
+    height:38px;
+    display:grid;
+    place-items:center;
+    border-radius:11px;
+    background:#ffedd5;
+    color:#9a3412;
+}
+
+.voice-form-card{
+    background:#fff;
+    border:1px solid #eee7df;
+    border-radius:24px;
+    padding:32px;
+    box-shadow:0 22px 55px rgba(68,64,60,.10);
+}
+
+.voice-form-card h3{
+    font-family:"Playfair Display",serif;
+    font-size:27px;
+    margin-bottom:6px;
+}
+
+.voice-form-card .voice-subtitle{
+    color:#78716c;
+    font-size:13px;
+    margin-bottom:25px;
+}
+
+.voice-category-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:15px;
+}
+
+.voice-field{
+    margin-bottom:16px;
+}
+
+.voice-field label{
+    display:block;
+    font-size:11px;
+    font-weight:800;
+    margin-bottom:7px;
+    color:#44403c;
+}
+
+.voice-field input,
+.voice-field select,
+.voice-field textarea{
+    width:100%;
+    border:1px solid #d6d3d1;
+    background:#fff;
+    padding:12px 13px;
+    border-radius:10px;
+    outline:none;
+    font-size:13px;
+    color:#292524;
+    transition:.2s;
+}
+
+.voice-field textarea{
+    min-height:150px;
+    resize:vertical;
+}
+
+.voice-field input:focus,
+.voice-field select:focus,
+.voice-field textarea:focus{
+    border-color:#c2410c;
+    box-shadow:0 0 0 3px rgba(194,65,12,.08);
+}
+
+.voice-submit{
+    width:100%;
+}
+
+.voice-note{
+    margin-top:12px;
+    text-align:center;
+    color:#a8a29e;
+    font-size:10px;
+}
+
+.voice-status{
+    display:none;
+    margin-bottom:16px;
+    padding:11px 13px;
+    border-radius:10px;
+    font-size:12px;
+}
+
+.voice-status.show{
+    display:block;
+}
+
+.voice-status.success{
+    background:#ecfdf5;
+    color:#047857;
+    border:1px solid #a7f3d0;
+}
+
+.voice-status.error{
+    background:#fef2f2;
+    color:#b91c1c;
+    border:1px solid #fecaca;
+}
+
+@media(max-width:950px){
+    .voice-grid{
+        grid-template-columns:1fr;
+        gap:35px;
+    }
+
+    .voice-intro{
+        padding-top:0;
+    }
+}
+
+@media(max-width:650px){
+    .voice-form-card{
+        padding:24px 20px;
+        border-radius:20px;
+    }
+
+    .voice-category-grid{
+        grid-template-columns:1fr;
+        gap:0;
+    }
+
+    .voice-form-card h3{
+        font-size:24px;
+    }
+}
+
 </style>
 </head>
 
@@ -2308,6 +2607,52 @@ Partner With Us
 </section>
 
 
+
+
+<!-- =========================================================
+     JOIN US ON SOCIAL MEDIA
+========================================================= -->
+<section class="social-community-section" id="social-community">
+  <div class="container">
+    <div class="social-community-head">
+      <span class="section-label">STAY CONNECTED</span>
+      <h2>Join Us on <span>Social Media</span></h2>
+      <p>Follow West Bengal Dalit Yuva Manch for community updates, youth programs, events and announcements.</p>
+    </div>
+
+    <div class="social-community-grid">
+      <a class="social-community-card" data-social="facebook" href="#" target="_blank" rel="noopener noreferrer">
+        <div class="social-community-icon"><i class="fa-brands fa-facebook-f"></i></div>
+        <h3>Facebook</h3>
+        <p>Follow our activities, announcements and community updates.</p>
+        <span class="social-community-action">Follow Us <i class="fa-solid fa-arrow-up-right-from-square"></i></span>
+      </a>
+
+      <a class="social-community-card" data-social="instagram" href="#" target="_blank" rel="noopener noreferrer">
+        <div class="social-community-icon"><i class="fa-brands fa-instagram"></i></div>
+        <h3>Instagram</h3>
+        <p>See photos, campaigns and moments from our journey.</p>
+        <span class="social-community-action">Follow Us <i class="fa-solid fa-arrow-up-right-from-square"></i></span>
+      </a>
+
+      <a class="social-community-card" data-social="youtube" href="#" target="_blank" rel="noopener noreferrer">
+        <div class="social-community-icon"><i class="fa-brands fa-youtube"></i></div>
+        <h3>YouTube</h3>
+        <p>Watch videos, programs, messages and community highlights.</p>
+        <span class="social-community-action">Subscribe <i class="fa-solid fa-arrow-up-right-from-square"></i></span>
+      </a>
+
+      <a class="social-community-card whatsapp" data-social="whatsapp" href="#" target="_blank" rel="noopener noreferrer">
+        <div class="social-community-icon"><i class="fa-brands fa-whatsapp"></i></div>
+        <h3>WhatsApp</h3>
+        <p>Connect with WBDYM directly on WhatsApp.</p>
+        <span class="social-community-action">Chat on WhatsApp <i class="fa-solid fa-arrow-right"></i></span>
+      </a>
+    </div>
+  </div>
+</section>
+
+
 <!-- =========================================================
      CONTACT
 ========================================================= -->
@@ -2496,6 +2841,164 @@ Send Message
 <p class="form-note">
 <i class="fa-solid fa-shield-halved"></i>
 Your information will be treated responsibly.
+</p>
+
+</form>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+
+<!-- =========================================================
+     COMMUNITY VOICE
+========================================================= -->
+
+<section class="section voice-section" id="share-voice">
+
+<div class="container voice-wrap">
+
+<div class="section-heading centered">
+    <span class="section-label">YOUR VOICE MATTERS</span>
+    <h2>Share Your <span>Voice With Us.</span></h2>
+    <p>
+        Have a thought, complaint, grievance, idea, story or speech to share?
+        We want to hear from you.
+    </p>
+</div>
+
+<div class="voice-grid">
+
+<div class="voice-intro">
+
+<h2>Speak. Share. <span>Be Heard.</span></h2>
+
+<p>
+Your experience and ideas can help us understand the community better,
+identify issues and create meaningful programs. You can also share a
+personal story, suggestion or a message for the community.
+</p>
+
+<div class="voice-points">
+
+<div class="voice-point">
+    <i class="fa-solid fa-lightbulb"></i>
+    <span>Ideas & suggestions for the community</span>
+</div>
+
+<div class="voice-point">
+    <i class="fa-solid fa-triangle-exclamation"></i>
+    <span>Complaints & grievances</span>
+</div>
+
+<div class="voice-point">
+    <i class="fa-solid fa-book-open"></i>
+    <span>Your story, experience or journey</span>
+</div>
+
+<div class="voice-point">
+    <i class="fa-solid fa-microphone"></i>
+    <span>Speech, message or community thoughts</span>
+</div>
+
+</div>
+
+</div>
+
+<div class="voice-form-card">
+
+<h3>Send Your Message</h3>
+
+<p class="voice-subtitle">
+Choose a topic and write whatever you would like to share with WBDYM.
+</p>
+
+<div id="voiceStatus" class="voice-status"></div>
+
+<form id="communityVoiceForm">
+
+<div class="voice-category-grid">
+
+<div class="voice-field">
+<label for="voiceName">Your Name</label>
+<input
+    id="voiceName"
+    name="name"
+    type="text"
+    maxlength="120"
+    placeholder="Your name"
+    required>
+</div>
+
+<div class="voice-field">
+<label for="voiceEmail">Email <span style="font-weight:500;color:#a8a29e;">(optional)</span></label>
+<input
+    id="voiceEmail"
+    name="email"
+    type="email"
+    maxlength="180"
+    placeholder="you@example.com">
+</div>
+
+</div>
+
+<div class="voice-field">
+
+<label for="voiceCategory">What would you like to share?</label>
+
+<select id="voiceCategory" name="category" required>
+    <option value="">Select a category</option>
+    <option value="Thought">💭 Thought</option>
+    <option value="Complaint">⚠️ Complaint</option>
+    <option value="Grievance">📣 Grievance</option>
+    <option value="Idea">💡 Idea / Suggestion</option>
+    <option value="Story">📖 Story / Experience</option>
+    <option value="Speech">🎤 Speech / Message</option>
+    <option value="Other">✉️ Other</option>
+</select>
+
+</div>
+
+<div class="voice-field">
+
+<label for="voiceSubject">Title</label>
+
+<input
+    id="voiceSubject"
+    name="subject"
+    type="text"
+    maxlength="180"
+    placeholder="Give your message a short title"
+    required>
+
+</div>
+
+<div class="voice-field">
+
+<label for="voiceMessage">Your Message</label>
+
+<textarea
+    id="voiceMessage"
+    name="message"
+    maxlength="5000"
+    placeholder="Write your thoughts, complaint, idea, story or speech here..."
+    required></textarea>
+
+</div>
+
+<button type="submit" class="btn btn-primary voice-submit" id="voiceSubmit">
+    <span>Submit to WBDYM</span>
+    <i class="fa-solid fa-paper-plane"></i>
+</button>
+
+<p class="voice-note">
+    <i class="fa-solid fa-shield-halved"></i>
+    Please do not share passwords, financial details or other highly sensitive information.
 </p>
 
 </form>
@@ -2975,6 +3478,129 @@ revealElements.forEach(el => {
 });
 
 
+
+/* =========================================================
+   SOCIAL MEDIA LINK BRIDGE
+   Mirrors links populated in the existing Contact social icons,
+   so Admin Panel changes also update the new social cards.
+========================================================= */
+function syncSocialCommunityLinks(){
+    const map = {
+        facebook: document.querySelector('.contact-info .social-links a[aria-label="Facebook"]'),
+        instagram: document.querySelector('.contact-info .social-links a[aria-label="Instagram"]'),
+        youtube: document.querySelector('.contact-info .social-links a[aria-label="YouTube"]'),
+        whatsapp: document.querySelector('.contact-info .social-links a[aria-label="WhatsApp"]')
+    };
+    Object.entries(map).forEach(([name, source]) => {
+        const target = document.querySelector('[data-social="'+name+'"]');
+        if(!source || !target) return;
+        const href = source.getAttribute('href');
+        if(href && href !== '#') target.setAttribute('href', href);
+    });
+}
+window.addEventListener('load', () => {
+    syncSocialCommunityLinks();
+    setTimeout(syncSocialCommunityLinks, 500);
+    setTimeout(syncSocialCommunityLinks, 1500);
+});
+
+
+/* =========================================================
+   COMMUNITY VOICE FORM
+   Saves public submissions into contact_messages so they
+   appear in the existing Admin > Messages panel.
+========================================================= */
+
+(function initCommunityVoice(){
+
+    const form = document.getElementById("communityVoiceForm");
+    const status = document.getElementById("voiceStatus");
+    const submit = document.getElementById("voiceSubmit");
+
+    if(!form) return;
+
+    function setVoiceStatus(message, type){
+        if(!status) return;
+        status.textContent = message;
+        status.className = "voice-status show " + type;
+    }
+
+    form.addEventListener("submit", async function(event){
+
+        event.preventDefault();
+
+        const name = form.elements.name.value.trim();
+        const email = form.elements.email.value.trim();
+        const category = form.elements.category.value;
+        const subject = form.elements.subject.value.trim();
+        const message = form.elements.message.value.trim();
+
+        if(!name || !category || !subject || !message){
+            setVoiceStatus("Please fill in all required fields.", "error");
+            return;
+        }
+
+        if(typeof window.supabase === "undefined"){
+            setVoiceStatus("The submission service is temporarily unavailable. Please try again later.", "error");
+            return;
+        }
+
+        const originalHTML = submit.innerHTML;
+        submit.disabled = true;
+        submit.innerHTML = '<span>Sending...</span><i class="fa-solid fa-spinner fa-spin"></i>';
+
+        try{
+
+            const voiceDB = window.supabase.createClient(
+                "https://oahuhywputxkncddlmol.supabase.co",
+                "sb_publishable_Me95pbzCTvG9kFV3frVXDw_l5YpafnG"
+            );
+
+            const result = await voiceDB
+                .from("contact_messages")
+                .insert({
+                    name: name,
+                    email: email || "",
+                    subject: "[" + category + "] " + subject,
+                    message: message
+                });
+
+            if(result.error){
+                throw result.error;
+            }
+
+            form.reset();
+
+            setVoiceStatus(
+                "Thank you! Your message has been submitted successfully.",
+                "success"
+            );
+
+            if(typeof showToast === "function"){
+                showToast("Your message has been submitted.");
+            }
+
+        }catch(error){
+
+            console.error("Community voice submission error:", error);
+
+            setVoiceStatus(
+                "We could not submit your message right now. Please try again.",
+                "error"
+            );
+
+        }finally{
+
+            submit.disabled = false;
+            submit.innerHTML = originalHTML;
+
+        }
+
+    });
+
+})();
+
+</script>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="wbdym-site.js"></script>
 </body>
