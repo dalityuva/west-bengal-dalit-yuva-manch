@@ -1,34 +1,87 @@
 <!doctype html>
 <html lang="en">
-<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>WBDYM Admin Panel</title><link rel="stylesheet" href="admin.css"></head>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#172b4d">
+<title>WBDYM Admin | Control Center</title>
+<link rel="stylesheet" href="admin.css">
+<style>
+:root{--wbdym-navy:#172b4d;--wbdym-orange:#c76b25;--wbdym-orange-dark:#a44c15;--wbdym-ink:#25324a;--wbdym-muted:#738096;--wbdym-line:#e5eaf1;--wbdym-bg:#f4f7fb}
+body{background:var(--wbdym-bg);color:var(--wbdym-ink)}
+.login{background:radial-gradient(circle at 15% 15%,#f9dfc6 0,transparent 32%),linear-gradient(135deg,#f5f7fb,#e9eef6)!important}
+.login-card,.card{border:1px solid rgba(226,232,240,.9)!important;border-radius:22px!important;box-shadow:0 18px 55px rgba(23,43,77,.09)!important}
+.logo,.brand-mark{display:grid;place-items:center;width:72px;height:72px;border-radius:18px;overflow:hidden;background:#fff;box-shadow:0 8px 22px #172b4d20;flex:0 0 auto}.logo img,.brand-mark img{width:100%;height:100%;object-fit:contain;display:block}.brand-mark{width:48px;height:48px;border-radius:12px}
+.brand{display:flex;align-items:center;gap:12px}.brand b{letter-spacing:.12em}.brand span{color:#e9a46c;font-size:11px;letter-spacing:.16em}
+aside{background:linear-gradient(180deg,#172b4d,#101f38)!important;color:#fff!important}aside nav button{border-radius:12px!important;margin:4px 0;transition:.2s}aside nav button:hover,aside nav button.active{background:#ffffff18!important;color:#fff!important}
+main>header{background:#fff!important;border-bottom:1px solid var(--wbdym-line)!important;padding:22px 30px!important}main>header h2{font-size:25px;letter-spacing:-.03em}main>header small,.head small{color:var(--wbdym-orange-dark);font-weight:800;letter-spacing:.15em}
+.content{padding:28px!important}.hero{border-radius:24px!important;background:linear-gradient(120deg,#172b4d,#25466e)!important;color:white!important;overflow:hidden;position:relative}.hero:after{content:"W";position:absolute;right:4%;top:-45%;font-size:300px;font-weight:900;color:#ffffff0b;pointer-events:none}.hero h1{color:white!important;font-size:clamp(28px,4vw,42px);letter-spacing:-.04em}.hero p{color:#dce6f5!important;max-width:620px}.stats>div{border:1px solid var(--wbdym-line)!important;border-radius:18px!important;background:#fff!important;box-shadow:0 8px 25px #172b4d08!important;padding:22px!important}.stats b{color:var(--wbdym-navy);font-size:30px}
+button{border-radius:10px!important;transition:transform .15s,box-shadow .15s}button:hover{transform:translateY(-1px)}button:disabled{opacity:.6;cursor:wait}.head{align-items:center}.head h2{letter-spacing:-.03em}.section-card,.item,.community-review-card{background:#fff;border:1px solid var(--wbdym-line);border-radius:18px;box-shadow:0 8px 26px #172b4d07;padding:22px;margin:18px 0}.section-card h3{margin-top:0;color:var(--wbdym-navy)}label{color:#42506a;font-weight:650}input,textarea,select{border:1px solid #dbe2ec!important;border-radius:10px!important;padding:11px 12px!important;background:#fbfcfe!important}input:focus,textarea:focus{outline:3px solid #c76b2520!important;border-color:var(--wbdym-orange)!important}button:not(.link){font-weight:750}.danger{background:#fff0ee!important;color:#b42318!important;border:1px solid #ffd2cd!important}.table{overflow:auto;border-radius:16px;border:1px solid var(--wbdym-line);background:#fff}.table table{width:100%;border-collapse:collapse}.table th{background:#f6f8fb;color:#59677e;font-size:12px;letter-spacing:.06em;text-transform:uppercase}.table th,.table td{padding:14px 16px;border-bottom:1px solid var(--wbdym-line);text-align:left}.status-pill{display:inline-flex;align-items:center;padding:5px 10px;border-radius:999px;font-size:11px;font-weight:850;letter-spacing:.04em;text-transform:uppercase;background:#eef2f7;color:#526176}.status-approved{background:#e5f7ec;color:#187344}.status-pending{background:#fff2d8;color:#955c00}.status-rejected{background:#ffebe9;color:#b42318}.review-topline{display:flex;justify-content:space-between;gap:12px;align-items:center}.review-date,.review-category,.hint{color:var(--wbdym-muted);font-size:13px}.community-review-card h3{margin:14px 0 5px;color:var(--wbdym-navy);font-size:21px}.review-category{font-weight:700;color:var(--wbdym-orange-dark)}.review-body{white-space:pre-wrap;overflow-wrap:anywhere;line-height:1.7;margin:16px 0}.review-actions{display:flex;flex-wrap:wrap;gap:9px;padding-top:15px;border-top:1px solid var(--wbdym-line)}.review-actions button{padding:10px 13px}.approve-post{background:#177245;color:#fff;border:1px solid #177245}.secondary-action{background:#fff5e9;color:#9a4e12;border:1px solid #f4d7bd}.empty-state{text-align:center;padding:48px 20px;background:#fff;border:1px dashed #ccd5e2;border-radius:18px}.empty-icon{font-size:32px;color:var(--wbdym-orange)}.error-card{border-color:#f3c4bf!important;color:#a32d25!important}.hidden{display:none!important}
+@media(max-width:700px){.content{padding:16px!important}main>header{padding:18px!important}.review-topline{align-items:flex-start;flex-direction:column}.stats{gap:12px}.section-card,.item,.community-review-card{padding:16px}}
+</style>
+</head>
 <body>
 <div id="toast"></div>
-<section id="login" class="login"><div class="card login-card"><div class="logo">W</div><small>WEST BENGAL DALIT YUVA MANCH</small><h1>Admin Panel</h1><p>Manage your website without coding.</p>
-<form id="loginForm"><label>Email<input id="email" type="email" required autocomplete="username"></label><label>Password<input id="password" type="password" required autocomplete="current-password"></label><button type="submit">Sign in</button></form>
-<button id="forgot" class="link" type="button">Forgot password?</button><div id="msg"></div></div></section>
-<div id="app" class="hidden"><aside><div class="brand"><b>WBDYM</b><span>ADMIN</span></div>
-<nav><button data-tab="dashboard">⌂ Dashboard</button><button data-tab="website">✎ Website</button><button data-tab="events">◷ Events</button><button data-tab="gallery">▣ Gallery</button><button data-tab="members">♙ Members</button><button data-tab="messages">✉ Messages</button><button data-tab="security">⚿ Security</button></nav>
-<div class="bottom"><a href="../" target="_blank" rel="noopener">↗ Website</a><button id="logout" type="button">⇥ Sign out</button></div></aside>
-<main><header><div><small>CONTROL CENTER</small><h2 id="title">Dashboard</h2></div><span id="adminEmail"></span></header><div class="content">
-<section class="tab active" id="dashboard"><div class="hero"><div><small>WEBSITE MANAGEMENT</small><h1>Your website, your control.</h1><p>Edit content, upload images, manage events and review submissions.</p></div></div><div class="stats"><div><span>Events</span><b id="eventCount">0</b></div><div><span>Gallery</span><b id="galleryCount">0</b></div><div><span>Members</span><b id="memberCount">0</b></div><div><span>Messages</span><b id="messageCount">0</b></div></div></section>
-
-<section class="tab" id="website"><div class="head"><div><small>CONTENT EDITOR</small><h2>Website Content</h2></div><button id="saveSite" type="button">Save changes</button></div>
-<div class="section-card"><h3>Brand & Hero</h3><form id="siteForm" class="grid">
-<label>Organization name<input name="site_name"></label><label>Short name<input name="short_name"></label><label>Tagline<input name="tagline"></label><label>Hero eyebrow<input name="hero_eyebrow"></label>
-<label class="wide">Hero title<textarea name="hero_title"></textarea></label><label class="wide">Hero subtitle<textarea name="hero_subtitle"></textarea></label><label>Hero button text<input name="hero_button_text"></label><label>Hero button URL<input name="hero_button_url"></label>
-<label>Logo URL<input name="logo_url" id="logoUrl"></label><div class="upload-box"><span>Upload logo</span><input id="logoFile" type="file" accept="image/*"><small id="logoStatus">No new file selected.</small></div>
-<label>Hero image URL<input name="hero_image_url" id="heroImageUrl"></label><div class="upload-box"><span>Upload hero image</span><input id="heroImageFile" type="file" accept="image/*"><small id="heroImageStatus">No new file selected.</small></div>
-</form></div>
-<div class="section-card"><h3>About, Vision & Mission</h3><form id="contentForm" class="grid"><label>About heading<input name="about_title"></label><label class="wide">About text<textarea name="about_text"></textarea></label><label class="wide">Vision<textarea name="vision_text"></textarea></label><label class="wide">Mission / purpose<textarea name="mission_text"></textarea></label></form></div>
-<div class="section-card"><h3>Contact & Social Media</h3><p class="hint">Ye details public website ke Contact section aur social icons mein automatically use hongi.</p>
-<form id="contactFormAdmin" class="grid"><label>Email<input name="email" type="email"></label><label>Phone<input name="phone"></label><label>WhatsApp number / link<input name="whatsapp"></label><label class="wide">Address<input name="address"></label><label>Facebook URL<input name="facebook_url" placeholder="https://facebook.com/..."></label><label>Instagram URL<input name="instagram_url" placeholder="https://instagram.com/..."></label><label>YouTube URL<input name="youtube_url" placeholder="https://youtube.com/..."></label><label>Donation URL<input name="donate_url" placeholder="https://..."></label></form></div>
-<button id="resetSite" class="danger" type="button">Reset homepage defaults</button></section>
-
-<section class="tab" id="events"><div class="head"><div><small>PUBLISH</small><h2>Events & Programs</h2></div><button id="addEvent" type="button">+ Add event</button></div><div id="eventsList"></div></section>
-<section class="tab" id="gallery"><div class="head"><div><small>MEDIA</small><h2>Gallery</h2></div><button id="addGallery" type="button">+ Add image</button></div><p class="hint">Ab computer/mobile se direct photo upload kar sakte ho. Photo Supabase Storage mein save hogi aur public website par show hogi.</p><div id="galleryList"></div></section>
-<section class="tab" id="members"><div class="head"><div><small>COMMUNITY</small><h2>Members</h2></div></div><div class="table"><table><thead><tr><th>Name</th><th>Email</th><th>Phone</th><th>District</th><th>Status</th></tr></thead><tbody id="membersTable"></tbody></table></div></section>
-<section class="tab" id="messages"><div class="head"><div><small>INBOX</small><h2>Contact Messages</h2></div></div><div id="messagesList"></div></section>
-<section class="tab" id="security"><div class="head"><div><small>SECURITY</small><h2>Admin Security</h2></div></div><div class="cards"><div class="card"><h3>Change password</h3><form id="passForm"><label>New password<input id="newPass" type="password" minlength="8" required></label><label>Confirm password<input id="confirmPass" type="password" minlength="8" required></label><button type="submit">Change password</button></form></div><div class="card"><h3>Password recovery</h3><p>Send a reset link to the current admin email.</p><button id="sendReset" type="button">Send reset email</button></div></div></section>
-</div></main></div>
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><script src="admin-config.js"></script><script src="admin.js"></script>
-</body></html>
+<section id="login" class="login">
+  <div class="card login-card">
+    <div class="logo" aria-label="West Bengal Dalit Yuva Manch logo"><img src="wbdym-logo.jpeg" alt="West Bengal Dalit Yuva Manch logo"></div>
+    <small>WEST BENGAL DALIT YUVA MANCH</small>
+    <h1>Admin Control Center</h1>
+    <p>Securely manage your organisationâ€™s digital presence.</p>
+    <form id="loginForm">
+      <label>Email<input id="email" type="email" required autocomplete="username"></label>
+      <label>Password<input id="password" type="password" required autocomplete="current-password"></label>
+      <button type="submit">Sign in securely</button>
+    </form>
+    <button id="forgot" class="link" type="button">Forgot password?</button>
+    <div id="msg"></div>
+  </div>
+</section>
+<div id="app" class="hidden">
+  <aside>
+    <div class="brand"><div class="brand-mark"><img src="wbdym-logo.jpeg" alt="WBDYM logo"></div><div><b>WBDYM</b><span>ADMIN CONTROL</span></div></div>
+    <nav>
+      <button data-tab="dashboard" class="active">âŒ‚ Dashboard</button>
+      <button data-tab="website">âœŽ Website</button>
+      <button data-tab="events">â—· Events</button>
+      <button data-tab="gallery">â–£ Gallery</button>
+      <button data-tab="members">â™™ Members</button>
+      <button data-tab="community-writing">âœ Community Writing</button>
+      <button data-tab="messages">âœ‰ Messages</button>
+      <button data-tab="security">âš¿ Security</button>
+    </nav>
+    <div class="bottom"><a href="../" target="_blank" rel="noopener">â†— Website</a><button id="logout" type="button">â‡¥ Sign out</button></div>
+  </aside>
+  <main>
+    <header><div><small>CONTROL CENTER</small><h2 id="title">Dashboard</h2></div><span id="adminEmail"></span></header>
+    <div class="content">
+      <section class="tab active" id="dashboard">
+        <div class="hero"><div><small>WEBSITE MANAGEMENT</small><h1>Your website, your control.</h1><p>Edit content, upload images, manage events, view member profiles and moderate community writing.</p></div></div>
+        <div class="stats"><div><span>Events</span><b id="eventCount">0</b></div><div><span>Gallery</span><b id="galleryCount">0</b></div><div><span>Member Profiles</span><b id="memberCount">0</b></div><div><span>Messages</span><b id="messageCount">0</b></div></div>
+      </section>
+      <section class="tab" id="website">
+        <div class="head"><div><small>CONTENT EDITOR</small><h2>Website Content</h2></div><button id="saveSite" type="button">Save changes</button></div>
+        <div class="section-card"><h3>Brand & Hero</h3><form id="siteForm" class="grid">
+          <label>Organization name<input name="site_name"></label><label>Short name<input name="short_name"></label><label>Tagline<input name="tagline"></label><label>Hero eyebrow<input name="hero_eyebrow"></label>
+          <label class="wide">Hero title<textarea name="hero_title"></textarea></label><label class="wide">Hero subtitle<textarea name="hero_subtitle"></textarea></label><label>Hero button text<input name="hero_button_text"></label><label>Hero button URL<input name="hero_button_url"></label>
+          <label>Logo URL<input name="logo_url" id="logoUrl"></label><div class="upload-box"><span>Upload logo</span><input id="logoFile" type="file" accept="image/*"><small id="logoStatus">No new file selected.</small></div>
+          <label>Hero image URL<input name="hero_image_url" id="heroImageUrl"></label><div class="upload-box"><span>Upload hero image</span><input id="heroImageFile" type="file" accept="image/*"><small id="heroImageStatus">No new file selected.</small></div>
+        </form></div>
+        <div class="section-card"><h3>About, Vision & Mission</h3><form id="contentForm" class="grid"><label>About heading<input name="about_title"></label><label class="wide">About text<textarea name="about_text"></textarea></label><label class="wide">Vision<textarea name="vision_text"></textarea></label><label class="wide">Mission / purpose<textarea name="mission_text"></textarea></label></form></div>
+        <div class="section-card"><h3>Contact & Social Media</h3><p class="hint">These details appear in the public website contact section and social links.</p><form id="contactFormAdmin" class="grid"><label>Email<input name="email" type="email"></label><label>Phone<input name="phone"></label><label>WhatsApp number / link<input name="whatsapp"></label><label class="wide">Address<input name="address"></label><label>Facebook URL<input name="facebook_url" placeholder="https://facebook.com/..."></label><label>Instagram URL<input name="instagram_url" placeholder="https://instagram.com/..."></label><label>YouTube URL<input name="youtube_url" placeholder="https://youtube.com/..."></label><label>Donation URL<input name="donate_url" placeholder="https://..."></label></form></div>
+        <button id="resetSite" class="danger" type="button">Reset homepage defaults</button>
+      </section>
+      <section class="tab" id="events"><div class="head"><div><small>PUBLISH</small><h2>Events & Programs</h2></div><button id="addEvent" type="button">+ Add event</button></div><div id="eventsList"></div></section>
+      <section class="tab" id="gallery"><div class="head"><div><small>MEDIA</small><h2>Gallery</h2></div><button id="addGallery" type="button">+ Add image</button></div><p class="hint">Upload photos directly from your device to Supabase Storage.</p><div id="galleryList"></div></section>
+      <section class="tab" id="members"><div class="head"><div><small>COMMUNITY DIRECTORY</small><h2>Member Profiles</h2></div><button id="refreshMembers" type="button">Refresh</button></div><p class="hint">No admin approval is required. Only profiles with public consent are listed here.</p><div class="table"><table><thead><tr><th>Name</th><th>District</th><th>Role</th><th>Visibility</th><th>Joined</th></tr></thead><tbody id="membersTable"></tbody></table></div></section>
+      <section class="tab" id="community-writing"><div class="head"><div><small>CONTENT MODERATION</small><h2>Community Writing</h2></div><button id="refreshCommunity" type="button">Refresh submissions</button></div><p class="hint">Only approved writing appears publicly. Members do not need approval to join the directory.</p><div id="communityPostsList"><div class="card">Open this section to load submissions.</div></div></section>
+      <section class="tab" id="messages"><div class="head"><div><small>INBOX</small><h2>Contact Messages</h2></div></div><div id="messagesList"></div></section>
+      <section class="tab" id="security"><div class="head"><div><small>SECURITY</small><h2>Admin Security</h2></div></div><div class="cards"><div class="card"><h3>Change password</h3><form id="passForm"><label>New password<input id="newPass" type="password" minlength="8" required></label><label>Confirm password<input id="confirmPass" type="password" minlength="8" required></label><button type="submit">Change password</button></form></div><div class="card"><h3>Password recovery</h3><p>Send a reset link to the current admin email.</p><button id="sendReset" type="button">Send reset email</button></div></div></section>
+    </div>
+  </main>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="admin-config.js"></script>
+<script src="admin.js"></script>
+</body>
+</html>
