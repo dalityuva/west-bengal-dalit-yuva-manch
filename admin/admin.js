@@ -124,12 +124,12 @@ document.addEventListener("DOMContentLoaded", () => {
       "WBDYM",
 
     tagline:
-      "Empowering Youth • Building an Equal Tomorrow",
+      "Empowering Youth â€¢ Building an Equal Tomorrow",
 
     logo_url: "",
 
     hero_eyebrow:
-      "YOUTH • EQUALITY • OPPORTUNITY",
+      "YOUTH â€¢ EQUALITY â€¢ OPPORTUNITY",
 
     hero_title:
       "Empowering Youth. Building a Better Tomorrow.",
@@ -572,10 +572,16 @@ document.addEventListener("DOMContentLoaded", () => {
             loadGallery();
           }
 
-          if (
-            tabName === "members"
-          ) {
+          if (tabName === "members") {
             loadMembers();
+          }
+
+          if (tabName === "community-writing") {
+            loadCommunityPosts();
+          }
+
+          if (tabName === "community-writing") {
+            loadCommunityPosts();
           }
 
           if (
@@ -1682,87 +1688,134 @@ document.addEventListener("DOMContentLoaded", () => {
   // ==========================================================
 
   async function loadMembers() {
-    if (!db || !$("#membersTable"))
-      return;
+    if (!db || !$("#membersTable")) return;
 
     try {
-      const {
-        data,
-        error
-      } =
-        await db
-          .from("members")
-          .select("*")
-          .order(
-            "created_at",
-            {
-              ascending: false
-            }
-          );
+      const { data, error } = await db
+        .from("member_profiles")
+        .select("id,full_name,district,designation,public_consent,created_at")
+        .order("created_at", { ascending: false });
 
       if (error) {
-        console.error(error);
+        console.error("Member profiles:", error);
+        $("#membersTable").innerHTML = `<tr><td colspan="5">Unable to load member profiles: ${escapeHTML(error.message)}</td></tr>`;
         return;
       }
 
-      if (!data?.length) {
-        $("#membersTable").innerHTML =
-          `
-          <tr>
-            <td colspan="5">
-              No members yet.
-            </td>
-          </tr>
-        `;
-
+      const publicMembers = (data || []).filter(member => member.public_consent === true);
+      if (!publicMembers.length) {
+        $("#membersTable").innerHTML = '<tr><td colspan="5">No members have opted into the public directory yet.</td></tr>';
         return;
       }
 
-      $("#membersTable").innerHTML =
-        data
-          .map(
-            (member) => `
-              <tr>
-
-                <td>
-                  ${escapeHTML(
-                    member.name
-                  )}
-                </td>
-
-                <td>
-                  ${escapeHTML(
-                    member.email
-                  )}
-                </td>
-
-                <td>
-                  ${escapeHTML(
-                    member.phone
-                  )}
-                </td>
-
-                <td>
-                  ${escapeHTML(
-                    member.district
-                  )}
-                </td>
-
-                <td>
-                  ${escapeHTML(
-                    member.status
-                  )}
-                </td>
-
-              </tr>
-            `
-          )
-          .join("");
-
+      $("#membersTable").innerHTML = publicMembers.map(member => `
+        <tr>
+          <td>${escapeHTML(member.full_name || "Unnamed member")}</td>
+          <td>${escapeHTML(member.district || "â€”")}</td>
+          <td>${escapeHTML(member.designation || "Member")}</td>
+          <td><span class="status-pill status-approved">Public</span></td>
+          <td>${member.created_at ? escapeHTML(new Date(member.created_at).toLocaleDateString()) : "â€”"}</td>
+        </tr>
+      `).join("");
     } catch (error) {
       console.error(error);
+      showToast("Unable to load member profiles: " + error.message);
     }
   }
+
+  $("#refreshMembers")?.addEventListener("click", loadMembers);
+
+  // ==========================================================
+  // COMMUNITY WRITING MODERATION (admin/editor only)
+  // ==========================================================
+
+  async function loadCommunityPosts() {
+    const container = $("#communityPostsList");
+    if (!db || !container) return;
+    container.innerHTML = '<div class="card">Loading community submissionsâ€¦</div>';
+
+    try {
+      const { data, error } = await db
+        .from("community_posts")
+        .select("id,title,category,body,created_at,author_id,status")
+        .order("created_at", { ascending: false });
+
+      if (error) {
+        console.error("Community writing:", error);
+        container.innerHTML = `<div class="card error-card">Unable to load writing: ${escapeHTML(error.message)}<p class="hint">Check the community_posts SELECT policy for authorised admins.</p></div>`;
+        return;
+      }
+
+      if (!data || data.length === 0) {
+        container.innerHTML = '<div class="empty-state"><div class="empty-icon">âœ</div><h3>No submissions yet</h3><p>New community writing will appear here for review.</p></div>';
+        return;
+      }
+
+      container.innerHTML = data.map(post => {
+        const status = String(post.status || "pending").toLowerCase();
+        const date = post.created_at ? new Date(post.created_at).toLocaleString() : "Date unavailable";
+        const isPending = status === "pending";
+        return `
+          <article class="community-review-card" data-id="${escapeHTML(post.id)}">
+            <div class="review-topline">
+              <span class="status-pill status-${escapeHTML(status)}">${escapeHTML(status)}</span>
+              <span class="review-date">${escapeHTML(date)}</span>
+            </div>
+            <h3>${escapeHTML(post.title || "Untitled submission")}</h3>
+            <div class="review-category">${escapeHTML(post.category || "General")}</div>
+            <p class="review-body">${escapeHTML(post.body || "")}</p>
+            <div class="review-actions">
+              ${isPending ? `<button type="button" class="approve-post">âœ“ Approve & publish</button><button type="button" class="reject-post secondary-action">Reject</button>` : ""}
+              ${status === "rejected" ? `<button type="button" class="approve-post">âœ“ Approve & publish</button>` : ""}
+              ${status === "approved" ? `<button type="button" class="reject-post secondary-action">Unpublish / reject</button>` : ""}
+              <button type="button" class="delete-post danger">Delete</button>
+            </div>
+          </article>`;
+      }).join("");
+    } catch (error) {
+      console.error(error);
+      container.innerHTML = `<div class="card error-card">Unable to load submissions: ${escapeHTML(error.message)}</div>`;
+    }
+  }
+
+  $("#refreshCommunity")?.addEventListener("click", loadCommunityPosts);
+
+  $("#communityPostsList")?.addEventListener("click", async event => {
+    const button = event.target.closest("button");
+    const card = event.target.closest(".community-review-card");
+    if (!button || !card || !db) return;
+    const id = card.dataset.id;
+
+    if (button.classList.contains("approve-post")) {
+      if (!window.confirm("Approve and publish this writing?")) return;
+      button.disabled = true;
+      const { error } = await db.from("community_posts").update({ status: "approved" }).eq("id", id);
+      if (error) { button.disabled = false; showToast("Approval failed: " + error.message); return; }
+      showToast("Writing approved and published.");
+      await loadCommunityPosts();
+      return;
+    }
+
+    if (button.classList.contains("reject-post")) {
+      if (!window.confirm("Reject or unpublish this writing?")) return;
+      button.disabled = true;
+      const { error } = await db.from("community_posts").update({ status: "rejected" }).eq("id", id);
+      if (error) { button.disabled = false; showToast("Update failed: " + error.message); return; }
+      showToast("Writing rejected / unpublished.");
+      await loadCommunityPosts();
+      return;
+    }
+
+    if (button.classList.contains("delete-post")) {
+      if (!window.confirm("Permanently delete this writing? This cannot be undone.")) return;
+      button.disabled = true;
+      const { error } = await db.from("community_posts").delete().eq("id", id);
+      if (error) { button.disabled = false; showToast("Delete failed: " + error.message); return; }
+      showToast("Writing deleted.");
+      await loadCommunityPosts();
+      await refreshDashboard();
+    }
+  });
 
   // ==========================================================
   // CONTACT MESSAGES
@@ -1827,7 +1880,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     )}
                   </strong>
 
-                  ·
+                  Â·
 
                   ${escapeHTML(
                     message.email
@@ -1903,7 +1956,7 @@ document.addEventListener("DOMContentLoaded", () => {
       await Promise.all([
         getCount("events"),
         getCount("gallery"),
-        getCount("members"),
+        getCount("member_profiles"),
         getCount(
           "contact_messages"
         )
